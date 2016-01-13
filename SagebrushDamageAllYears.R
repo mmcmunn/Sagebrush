@@ -194,7 +194,6 @@ fit <- stan(file = "sagebrushYears.stan", data = list(damLeaves, totLeaves,year,
 print(fit)
 quantile(logistic(fit @sim$samples$b[1]), c(0.025, 0.5, 0.975))
 
-?logistic
 lines(fit @sim$samples[[2]]$a, col = "red")
 
 
@@ -203,6 +202,7 @@ pairs(fit)
 print(fit, digits = 3)
 
 
+library(rethinking)
 data(UCBadmit)
 d <- UCBadmit
 
@@ -219,9 +219,9 @@ m11.5 <- map2stan(
   iter=4000 , warmup=1000 , chains=2 , cores=2 )
 
 
+library(rethinking)
 data(reedfrogs)
 d <- reedfrogs
-
 # make the tank cluster variable
 d$tank <- 1:nrow(d)
 # fit
@@ -239,12 +239,3 @@ stancode(m12.1)
 precis(m11.5)
 
 stancode(m11.5)
-
-plot(fit, pars = "beta")
-pairs(fit)
-print(fit, digits = 3)
-
-
-
-
-
